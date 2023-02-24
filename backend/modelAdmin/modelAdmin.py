@@ -17,7 +17,7 @@ class ModelAdmin(GuardedModelAdmin):
 
   # rewite of ModelAdmim 
   def get_queryset(self, request):
-    if request.user.is_superuser:
+    if request.user.is_superuser and request.user.is_staff:
       return super().get_queryset(request)
     data = self.get_model_objects(request)
     return data
@@ -37,14 +37,21 @@ class ModelAdmin(GuardedModelAdmin):
 
   # rewite of ModelAdmim (has_view_permission, has_add_permission, has_change_permission, has_delete_permission)
   def has_view_permission(self, request, obj=None):
+    if request.user.is_superuser and request.user.is_staff:
+      return True
     return self.has_permission(request=request, action='view', obj=obj)
   
   def has_add_permission(self, request):
-    return self.has_permission(request=request, action='add')
+    if request.user.is_superuser and request.user.is_staff:
+      return True
     # return self.has_permission(request=request, action='add') #not necessary
 
   def has_change_permission(self, request, obj=None):
+    if request.user.is_superuser and request.user.is_staff:
+      return True
     return self.has_permission(request=request, action='change', obj=obj)
     
   def has_delete_permission(self, request, obj=None):
+    if request.user.is_superuser and request.user.is_staff:
+      return True
     return self.has_permission(request=request, action='delete', obj=obj)

@@ -23,7 +23,7 @@ class ModelAdmin(GuardedModelAdmin):
     return data
 
   def get_model_objects(self, request, action=None, klass=None):
-    actions = [action] if action else ['add', 'view', 'change', 'delete']
+    actions = [action] if action else ['view', 'change', 'delete']
     klass = klass if klass else self.opts.model
     model_name = klass._meta.model_name
     return get_objects_for_user(user=request.user, perms=[f'{perm}_{model_name}' for perm in actions], klass=klass, any_perm=True)
@@ -41,6 +41,7 @@ class ModelAdmin(GuardedModelAdmin):
   
   def has_add_permission(self, request):
     return self.has_permission(request=request, action='add')
+    # return self.has_permission(request=request, action='add') #not necessary
 
   def has_change_permission(self, request, obj=None):
     return self.has_permission(request=request, action='change', obj=obj)

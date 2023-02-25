@@ -16,6 +16,9 @@ class Notification(models.Model):
   description = models.CharField(max_length=256, default='', blank=True)
   create_date = models.DateTimeField(auto_now_add=True)
 
+  class Meta():
+    ordering = ['-create_date']
+
   def __str__(self):
     return self.title
 

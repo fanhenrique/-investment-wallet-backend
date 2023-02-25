@@ -3,7 +3,7 @@ from guardian.shortcuts import get_objects_for_user
 
 class ModelAdmin(GuardedModelAdmin):
   #ModelAdim
-  list_display = ('name', )
+  # list_display = ('name', )
   
   #GuardedModelAdminMixin
   user_can_access_owned_objects_only = True

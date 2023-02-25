@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+
 from apps.active.models import Active
 
 class ActiveSerializer(ModelSerializer):

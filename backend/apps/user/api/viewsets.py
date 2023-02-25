@@ -44,7 +44,7 @@ class UserViewSet(ModelViewSet):
 
   @action(detail=False, methods=['get'])
   def notifications(self, request, *args, **kwargs):
-    return self.pagination(self.set_queryset(request.auth, 'nofitication.view_notification', NotificationSerializer))
+    return self.pagination(self.set_queryset(request.auth, 'notification.view_notification', NotificationSerializer))
   
   @action(detail=False, methods=['get'])
   def actives(self, request, *args, **kwargs):
@@ -57,6 +57,7 @@ class UserViewSet(ModelViewSet):
         self.serializer_class = ActiveSerializer
       except:
         return Response(data={"detail": 'Use "id_wallet" to inform the wallet'}, status=status.HTTP_400_BAD_REQUEST)
+
       return self.pagination(actives)
 
     else:

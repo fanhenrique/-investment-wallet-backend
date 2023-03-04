@@ -20,6 +20,7 @@ from django.urls import include
 from rest_framework import routers
 from rest_framework.authtoken import views
 
+from auth.customAuthToken import CustomAuthToken
 from apps.wallet.api.viewsets import WalletViewSet
 from apps.active.api.viewsets import ActiveViewSet
 from apps.user.api.viewsets import UserViewSet
@@ -31,6 +32,6 @@ routers.register(r'active', ActiveViewSet)
 
 urlpatterns = [
   path('admin/', admin.site.urls),
-  path('api-auth/', views.obtain_auth_token),
+  path('auth/', CustomAuthToken.as_view()),
   path('api/', include(routers.urls)),
 ]
